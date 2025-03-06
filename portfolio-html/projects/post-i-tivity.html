@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eugene Au | Post-i-tivity Project</title>
+    <meta name="description" content="Post-i-tivity - A progressive web app to promote sustainability through mental health, exercise, and community engagement">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../portfolio-html/css/style.css">
+    <link rel="stylesheet" href="../../portfolio-html/css/animations.css">
+    <style>
+        /* Project Detail Page Specific Styles */
+        .project-header {
+            padding: 8rem 0 4rem;
+            background-color: var(--bg-color-alt);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-meta-item {
+            display: flex;
+            align-items: center;
+            color: var(--text-color-light);
+        }
+        
+        .project-meta-item i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .project-link-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+        
+        .project-link-btn i {
+            margin-left: 0.5rem;
+        }
+        
+        .project-link-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .project-link-btn.secondary {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .project-link-btn.secondary:hover {
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+        
+        .project-content {
+            padding: 4rem 0;
+        }
+        
+        .project-section {
+            margin-bottom: 3rem;
+        }
+        
+        .project-section-title {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .project-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .project-text {
+            color: var(--text-color-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform var(--transition-fast);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(139, 92, 246, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-color);
+        }
+        
+        .feature-description {
+            color: var(--text-color-light);
+            line-height: 1.6;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        
+        .tech-item {
+            padding: 0.5rem 1rem;
+            background-color: rgba(139, 92, 246, 0.1);
+            color: var(--primary-color);
+            border-radius: var(--border-radius-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .project-gallery {
+            margin-top: 3rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            aspect-ratio: 16/9;
+            position: relative;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-medium);
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+        
+        .team-section {
+            margin-top: 4rem;
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-member-name {
+            font-size: 1.125rem;
+            margin: 0.75rem 0 0.25rem;
+            color: var(--text-color);
+        }
+        
+        .team-member-role {
+            color: var(--text-color-light);
+            font-size: 0.875rem;
+        }
+        
+        .project-image-main {
+            max-width: 100%;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
+            margin: 2rem 0;
+        }
+        
+        .project-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            object-fit: contain;
+        }
+        
+        .related-projects {
+            margin-top: 1.5rem;
+        }
+        
+        .related-project {
+            display: block;
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--card-shadow);
+            transition: transform var(--transition-fast);
+            margin-bottom: 1.5rem;
+        }
+        
+        .related-project:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-project h3 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .related-project p {
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .related-project .project-tags {
+            margin-bottom: 1rem;
+        }
+        
+        .related-project .project-features-preview ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+        
+        .related-project .project-features-preview li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .related-project .project-features-preview li::before {
+            content: '•';
+            position: absolute;
+            left: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        @media (min-width: 768px) {
+            .project-title {
+                font-size: 3rem;
+            }
+            
+            .project-content-grid {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html" class="logo-text">Eugene Au</a>
+                </div>
+                <nav class="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="../projects.html" class="nav-link active">Projects</a></li>
+                        <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item"><a href="../index.html" class="mobile-nav-link">Home</a></li>
+            <li class="mobile-nav-item"><a href="../projects.html" class="mobile-nav-link active">Projects</a></li>
+            <li class="mobile-nav-item"><a href="../about.html" class="mobile-nav-link">About</a></li>
+            <li class="mobile-nav-item"><a href="../contact.html" class="mobile-nav-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <div class="project-header-content reveal-bottom">
+                <a href="../projects.html" class="btn btn-secondary mb-4">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Projects
+                </a>
+                <img src="../../portfolio-html/icon.png" alt="Post-i-tivity Logo" class="project-icon">
+                <h1 class="project-title">Post-i-tivity</h1>
+                <div class="project-meta">
+                    <div class="project-meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>2024</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <i class="fas fa-folder"></i>
+                        <span>Web Development</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>Team Project</span>
+                    </div>
+                </div>
+                <p class="project-description">
+                    A progressive web app to upload images and posts that users can make as they explore Exeter University's campus and promote sustainability through improving mental health, exercise, community engagement, social welfare and awareness of the environment.
+                </p>
+                <div class="project-links">
+                    <a href="https://post-i-tivity.me" target="_blank" class="project-link-btn">
+                        Visit Website <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="https://api.post-i-tivity.me" target="_blank" class="project-link-btn secondary">
+                        Backend API <i class="fas fa-code"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="project-content-grid">
+                <div class="project-main-content">
+                    <!-- Project Overview -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Project Overview</h2>
+                        <p class="project-text">
+                            Post-i-tivity is a progressive web application designed to enhance the university experience at Exeter by encouraging students to explore the campus while promoting sustainability through various aspects of wellbeing. The app allows users to create and collect virtual postcards as they walk around campus, fostering a sense of community and environmental awareness.
+                        </p>
+                        <img src="../../portfolio-html/website_screenshot.png" alt="Post-i-tivity Screenshot" class="project-image-main reveal-item">
+                        <p class="project-text">
+                            The project was developed as part of the ECM2434 Software Engineering Group Project module at the University of Exeter. Our team, Exception Handler, worked collaboratively to design, develop, and deploy this application using modern web technologies and following agile development practices.
+                        </p>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Key Features</h2>
+                        <div class="project-features">
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <h3 class="feature-title">Virtual Postcards</h3>
+                                <p class="feature-description">
+                                    Create and collect virtual postcards by exploring different locations around the university campus.
+                                </p>
+                            </div>
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h3 class="feature-title">Location-Based Content</h3>
+                                <p class="feature-description">
+                                    Discover content specific to your location on campus, encouraging physical activity and exploration.
+                                </p>
+                            </div>
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <h3 class="feature-title">Sustainability Focus</h3>
+                                <p class="feature-description">
+                                    Promotes environmental awareness and sustainable practices through engaging content and challenges.
+                                </p>
+                            </div>
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3 class="feature-title">Mental Health Support</h3>
+                                <p class="feature-description">
+                                    Encourages activities that improve mental wellbeing through exercise, social interaction, and mindfulness.
+                                </p>
+                            </div>
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3 class="feature-title">Community Engagement</h3>
+                                <p class="feature-description">
+                                    Connect with other students and share experiences through the platform, fostering a sense of community.
+                                </p>
+                            </div>
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h3 class="feature-title">Progressive Web App</h3>
+                                <p class="feature-description">
+                                    Works across all devices with a responsive design and can be installed on home screens for quick access.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Development Process -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Development Process</h2>
+                        <p class="project-text">
+                            Our team followed an agile development methodology, using Trello for task management and regular sprint meetings to track progress. We began with a comprehensive problem analysis and requirements gathering phase, creating a MoSCoW matrix to prioritize features.
+                        </p>
+                        <p class="project-text">
+                            The design phase involved creating detailed UI/UX mockups in Figma, ensuring a user-friendly and visually appealing interface. We also developed an ER diagram to plan the database structure efficiently.
+                        </p>
+                        <p class="project-text">
+                            Development was split between frontend and backend teams, with regular integration to ensure smooth functionality. We implemented continuous integration and deployment practices to maintain code quality and facilitate quick updates.
+                        </p>
+                    </div>
+
+                    <!-- Technologies Used -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Technologies Used</h2>
+                        <p class="project-text">
+                            The project leverages a modern tech stack to deliver a seamless user experience:
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-item">React</span>
+                            <span class="tech-item">JavaScript</span>
+                            <span class="tech-item">HTML/CSS</span>
+                            <span class="tech-item">Figma</span>
+                            <span class="tech-item">Geolocation API</span>
+                            <span class="tech-item">Django</span>
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">RESTful API</span>
+                            <span class="tech-item">PostgreSQL</span>
+                            <span class="tech-item">Docker</span>
+                        </div>
+                    </div>
+
+                    <!-- Challenges & Solutions -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Challenges & Solutions</h2>
+                        <p class="project-text">
+                            Throughout the development process, we encountered several challenges:
+                        </p>
+                        <ul class="project-text">
+                            <li><strong>Location Accuracy:</strong> Ensuring precise geolocation was challenging. We implemented a custom algorithm to improve accuracy and provide a better user experience.</li>
+                            <li><strong>Cross-Platform Compatibility:</strong> Making the app work seamlessly across different devices required extensive testing and responsive design implementation.</li>
+                            <li><strong>User Engagement:</strong> To keep users engaged, we incorporated gamification elements and regular content updates to encourage continued exploration.</li>
+                            <li><strong>Performance Optimization:</strong> We optimized image loading and database queries to ensure fast performance even with limited connectivity.</li>
+                        </ul>
+                    </div>
+
+                    <!-- My Contribution -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">My Contribution</h2>
+                        <p class="project-text">
+                            As a member of the Exception Handler team, I contributed to various aspects of the project:
+                        </p>
+                        <ul class="project-text">
+                            <li>Collaborated on UI/UX design using Figma, focusing on creating an intuitive and engaging user interface</li>
+                            <li>Developed frontend components using React, ensuring responsive design and smooth animations</li>
+                            <li>Implemented geolocation features to enable location-based content discovery</li>
+                            <li>Participated in regular team meetings and sprint planning sessions</li>
+                            <li>Conducted user testing and incorporated feedback to improve the application</li>
+                        </ul>
+                    </div>
+
+                    <!-- Team Members -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Team Members</h2>
+                        <p class="project-text">
+                            Post-i-tivity was developed by the Exception Handler team, consisting of:
+                        </p>
+                        <div class="team-members">
+                            <div class="team-member reveal-item">
+                                <h3 class="team-member-name">Ziyad Alnawfal</h3>
+                                <p class="team-member-role">Team Member</p>
+                            </div>
+                            <div class="team-member reveal-item">
+                                <h3 class="team-member-name">Eugene Au</h3>
+                                <p class="team-member-role">Frontend Developer</p>
+                            </div>
+                            <div class="team-member reveal-item">
+                                <h3 class="team-member-name">Robert Bulcock</h3>
+                                <p class="team-member-role">Team Member</p>
+                            </div>
+                            <div class="team-member reveal-item">
+                                <h3 class="team-member-name">Jayant Chawla</h3>
+                                <p class="team-member-role">Team Member</p>
+                            </div>
+                            <div class="team-member reveal-item">
+                                <h3 class="team-member-name">Ben Ellison</h3>
+                                <p class="team-member-role">Team Member</p>
+                            </div>
+                            <div class="team-member reveal-item">
+                                <h3 class="team-member-name">Adam George</h3>
+                                <p class="team-member-role">Team Member</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="project-sidebar">
+                    <!-- Quick Links -->
+                    <div class="project-section reveal-right">
+                        <h2 class="project-section-title">Quick Links</h2>
+                        <ul class="project-links-list">
+                            <li><a href="https://post-i-tivity.me" target="_blank" class="sidebar-link"><i class="fas fa-link"></i> Website</a></li>
+                            <li><a href="https://api.post-i-tivity.me" target="_blank" class="sidebar-link"><i class="fas fa-server"></i> Backend API</a></li>
+                            <li><a href="https://app.capacities.io/home/463a8802-6f14-4a08-ae38-84f59633b099" target="_blank" class="sidebar-link"><i class="fas fa-file-alt"></i> Design Specification</a></li>
+                            <li><a href="https://trello.com/invite/b/BJR31baF/ATTIb1c6e5342ef1688706a802c27e588be71483CB5A/exceptionhandler" target="_blank" class="sidebar-link"><i class="fab fa-trello"></i> Trello Board</a></li>
+                            <li><a href="https://docs.google.com/document/d/12DYmSQIUxew5tGOtPeQzCtYuHQSk108R6Vdqpxnqd7c/edit?usp=sharing" target="_blank" class="sidebar-link"><i class="fas fa-file-word"></i> Meeting Minutes</a></li>
+                            <li><a href="https://www.figma.com/file/nqrpx6RnDdkeYhZkXTt9QS/Home?type=design&node-id=0%3A1&mode=design&t=HJN6YjjbWdqIllhD-1" target="_blank" class="sidebar-link"><i class="fab fa-figma"></i> Figma Board</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Skills -->
+                    <div class="project-section reveal-right">
+                        <h2 class="project-section-title">Key Skills</h2>
+                        <div class="tech-stack">
+                            <span class="tech-item">UI/UX Design</span>
+                            <span class="tech-item">Frontend Development</span>
+                            <span class="tech-item">Responsive Design</span>
+                            <span class="tech-item">Geolocation</span>
+                            <span class="tech-item">Team Collaboration</span>
+                            <span class="tech-item">Agile Methodology</span>
+                            <span class="tech-item">Problem Solving</span>
+                        </div>
+                    </div>
+
+                    <!-- Related Projects -->
+                    <div class="project-section reveal-right">
+                        <h2 class="project-section-title">Related Projects</h2>
+                        <div class="related-projects">
+                            <a href="pairs-game.html" class="related-project">
+                                <h3>Pairs Game</h3>
+                                <p>Interactive memory game with customizable avatars and multiple levels</p>
+                                <div class="project-tags">
+                                    <span class="tag">PHP</span>
+                                    <span class="tag">JavaScript</span>
+                                    <span class="tag">CSS</span>
+                                    <span class="tag">Responsive Design</span>
+                                </div>
+                                <div class="project-features-preview">
+                                    <ul>
+                                        <li>Multiple difficulty levels with increasing card count</li>
+                                        <li>Customizable emoji avatars</li>
+                                        <li>Real-time scoring and leaderboard</li>
+                                        <li>Responsive design for all screen sizes</li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content reveal-bottom">
+                <h2 class="cta-title">Interested in working together?</h2>
+                <p class="cta-description">I'm always open to discussing new projects and creative ideas.</p>
+                <a href="../contact.html" class="btn btn-light">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3 class="footer-title">Eugene Au</h3>
+                    <p class="footer-description">Computer Science student and Front-end Developer based in Exeter, Devon.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-nav">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../projects.html">Projects</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3 class="footer-title">Connect</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:eugeneau499@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; <span id="current-year"></span> Eugene Au. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="../../portfolio-html/js/main.js"></script>
+    <script src="../../portfolio-html/js/animations.js"></script>
+</body>
+</html> 

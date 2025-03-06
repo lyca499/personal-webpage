@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eugene Au | Projects</title>
+    <meta name="description" content="Explore Eugene Au's portfolio of projects and work">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* Projects Page Specific Styles */
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-family: var(--font-primary);
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .dark-mode .filter-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .projects-grid {
+            min-height: 400px;
+        }
+        
+        .project-card {
+            transition: all var(--transition-medium);
+        }
+        
+        .project-card.hide {
+            display: none;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-color-light);
+            display: none;
+        }
+        
+        .no-results.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" class="logo-text">Eugene Au</a>
+                </div>
+                <nav class="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="projects.html" class="nav-link active">Projects</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item"><a href="index.html" class="mobile-nav-link">Home</a></li>
+            <li class="mobile-nav-item"><a href="projects.html" class="mobile-nav-link active">Projects</a></li>
+            <li class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About</a></li>
+            <li class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Projects Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content reveal-bottom">
+                <h1 class="page-title">My Projects</h1>
+                <p class="page-description">Explore my work across various domains and technologies. Each project represents a unique challenge and solution.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <!-- Filter Buttons -->
+            <div class="filter-container reveal-bottom">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="game">Game Development</button>
+                <button class="filter-btn" data-filter="ml">Machine Learning</button>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="projects-grid">
+                <!-- Post-i-tivity Project -->
+                <div class="project-card reveal-item" data-category="web">
+                    <div class="project-image">
+                        <img src="../portfolio-html/website_screenshot.png" alt="Post-i-tivity Project">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h3 class="project-title">Post-i-tivity</h3>
+                                <p class="project-description">A progressive web app for creating and collecting virtual postcards at Exeter University.</p>
+                                <div class="project-tags">
+                                    <span class="tag">React</span>
+                                    <span class="tag">Django</span>
+                                    <span class="tag">Python</span>
+                                    <span class="tag">PostgreSQL</span>
+                                </div>
+                                <a href="projects/post-i-tivity.html" class="btn btn-light">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pairs Game Project -->
+                <div class="project-card reveal-item" data-category="web">
+                    <div class="project-image">
+                        <img src="../portfolio-html/images/pairs-game-screenshot.png" alt="Pairs Game Project">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h3 class="project-title">Pairs Game</h3>
+                                <p class="project-description">An interactive memory card game with multiple difficulty levels and customizable avatars.</p>
+                                <div class="project-tags">
+                                    <span class="tag">PHP</span>
+                                    <span class="tag">JavaScript</span>
+                                    <span class="tag">MySQL</span>
+                                    <span class="tag">CSS</span>
+                                </div>
+                                <a href="projects/pairs-game.html" class="btn btn-light">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- No Results Message -->
+            <div class="no-results">
+                <p>No projects found in this category.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content reveal-bottom">
+                <h2 class="cta-title">Let's Work Together</h2>
+                <p class="cta-description">Have a project in mind or interested in my skills? I'm currently available for freelance work and opportunities.</p>
+                <a href="contact.html" class="btn btn-light">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3 class="footer-title">Eugene Au</h3>
+                    <p class="footer-description">Computer Science student and Front-end Developer based in Exeter, Devon.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3 class="footer-title">Connect</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:eugeneau499@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; <span id="current-year"></span> Eugene Au. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script>
+        // Projects filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            const noResults = document.querySelector('.no-results');
+            
+            // Filter projects when a filter button is clicked
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter projects
+                    let visibleCount = 0;
+                    
+                    projectCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        
+                        if (filterValue === 'all' || filterValue === category) {
+                            card.classList.remove('hide');
+                            visibleCount++;
+                        } else {
+                            card.classList.add('hide');
+                        }
+                    });
+                    
+                    // Show/hide no results message
+                    if (visibleCount === 0) {
+                        noResults.classList.add('show');
+                    } else {
+                        noResults.classList.remove('show');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

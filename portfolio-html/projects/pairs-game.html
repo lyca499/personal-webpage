@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eugene Au | Pairs Game Project</title>
+    <meta name="description" content="Pairs Game - An interactive memory game with customizable avatars and multiple difficulty levels">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../portfolio-html/css/style.css">
+    <link rel="stylesheet" href="../../portfolio-html/css/animations.css">
+    <style>
+        /* Project Detail Page Specific Styles */
+        .project-header {
+            padding: 8rem 0 4rem;
+            background-color: var(--bg-color-alt);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-meta-item {
+            display: flex;
+            align-items: center;
+            color: var(--text-color-light);
+        }
+        
+        .project-meta-item i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .project-link-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius-md);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+        
+        .project-link-btn i {
+            margin-left: 0.5rem;
+        }
+        
+        .project-link-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .project-link-btn.secondary {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .project-link-btn.secondary:hover {
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+        
+        .project-content {
+            padding: 4rem 0;
+        }
+        
+        .project-section {
+            margin-bottom: 3rem;
+        }
+        
+        .project-section-title {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .project-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .project-text {
+            color: var(--text-color-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform var(--transition-fast);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(139, 92, 246, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-color);
+        }
+        
+        .feature-description {
+            color: var(--text-color-light);
+            line-height: 1.6;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        
+        .tech-item {
+            padding: 0.5rem 1rem;
+            background-color: rgba(139, 92, 246, 0.1);
+            color: var(--primary-color);
+            border-radius: var(--border-radius-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .project-gallery {
+            margin-top: 3rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            aspect-ratio: 16/9;
+            position: relative;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-medium);
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+        
+        @media (min-width: 768px) {
+            .project-title {
+                font-size: 3rem;
+            }
+            
+            .project-content-grid {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html" class="logo-text">Eugene Au</a>
+                </div>
+                <nav class="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="../projects.html" class="nav-link active">Projects</a></li>
+                        <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <div class="project-header-content reveal-bottom">
+                <a href="../projects.html" class="btn btn-secondary mb-4">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Projects
+                </a>
+                <img src="../../portfolio-html/images/pairs-game-icon.png" alt="Pairs Game Logo" class="project-icon">
+                <h1 class="project-title">Pairs Game</h1>
+                <div class="project-meta">
+                    <div class="project-meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>2023</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <i class="fas fa-folder"></i>
+                        <span>Web Development</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <i class="fas fa-code"></i>
+                        <span>Personal Project</span>
+                    </div>
+                </div>
+                <p class="project-description">
+                    An engaging memory card game with multiple difficulty levels, customizable emoji avatars, and real-time scoring system. Built with PHP, JavaScript, and modern web technologies.
+                </p>
+                <div class="project-links">
+                    <a href="#" target="_blank" class="project-link-btn">
+                        Play Game <i class="fas fa-gamepad"></i>
+                    </a>
+                    <a href="#" target="_blank" class="project-link-btn secondary">
+                        View Source <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="project-content-grid">
+                <div class="project-main-content">
+                    <!-- Project Overview -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Project Overview</h2>
+                        <p class="project-text">
+                            The Pairs Game is an interactive memory card game that challenges players to match pairs of cards while competing against time and tracking their scores. The game features multiple difficulty levels, customizable emoji avatars, and a global leaderboard system.
+                        </p>
+                        <img src="../../portfolio-html/images/pairs-game-screenshot.png" alt="Pairs Game Screenshot" class="project-image-main reveal-item">
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Key Features</h2>
+                        <div class="project-features">
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <h3 class="feature-title">Multiple Difficulty Levels</h3>
+                                <p class="feature-description">
+                                    Choose from easy, medium, or hard modes with increasing numbers of cards and complexity.
+                                </p>
+                            </div>
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-smile"></i>
+                                </div>
+                                <h3 class="feature-title">Customizable Avatars</h3>
+                                <p class="feature-description">
+                                    Personalize your gaming experience by selecting from a variety of emoji avatars.
+                                </p>
+                            </div>
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <h3 class="feature-title">Global Leaderboard</h3>
+                                <p class="feature-description">
+                                    Compete with other players and track your high scores on the global leaderboard.
+                                </p>
+                            </div>
+                            <div class="feature-item reveal-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h3 class="feature-title">Responsive Design</h3>
+                                <p class="feature-description">
+                                    Play seamlessly on any device with a fully responsive and adaptive layout.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Implementation -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Technical Implementation</h2>
+                        <p class="project-text">
+                            The game is built using modern web technologies and follows best practices for performance and user experience:
+                        </p>
+                        <ul class="project-text">
+                            <li><strong>Frontend:</strong> Built with vanilla JavaScript for game logic and animations</li>
+                            <li><strong>Backend:</strong> PHP handles user authentication and score tracking</li>
+                            <li><strong>Database:</strong> MySQL stores user profiles and leaderboard data</li>
+                            <li><strong>Responsive Design:</strong> CSS Grid and Flexbox ensure compatibility across devices</li>
+                            <li><strong>Performance:</strong> Optimized asset loading and caching for smooth gameplay</li>
+                        </ul>
+                    </div>
+
+                    <!-- Development Process -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Development Process</h2>
+                        <p class="project-text">
+                            The development process involved several key phases:
+                        </p>
+                        <ol class="project-text">
+                            <li>Planning and wireframing the game interface</li>
+                            <li>Implementing core game mechanics and card matching logic</li>
+                            <li>Adding difficulty levels and scoring system</li>
+                            <li>Developing user authentication and profile customization</li>
+                            <li>Creating the leaderboard and social features</li>
+                            <li>Testing and optimizing performance across devices</li>
+                        </ol>
+                    </div>
+
+                    <!-- Future Enhancements -->
+                    <div class="project-section reveal-bottom">
+                        <h2 class="project-section-title">Future Enhancements</h2>
+                        <p class="project-text">
+                            Planned features for future updates include:
+                        </p>
+                        <ul class="project-text">
+                            <li>Multiplayer mode for real-time competition</li>
+                            <li>Additional card themes and customization options</li>
+                            <li>Achievement system with badges and rewards</li>
+                            <li>Social sharing integration</li>
+                            <li>Progressive Web App (PWA) implementation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="project-sidebar">
+                    <!-- Technologies Used -->
+                    <div class="project-section reveal-right">
+                        <h2 class="project-section-title">Technologies Used</h2>
+                        <div class="tech-stack">
+                            <span class="tech-item">PHP</span>
+                            <span class="tech-item">JavaScript</span>
+                            <span class="tech-item">HTML5</span>
+                            <span class="tech-item">CSS3</span>
+                            <span class="tech-item">MySQL</span>
+                            <span class="tech-item">Git</span>
+                            <span class="tech-item">Responsive Design</span>
+                        </div>
+                    </div>
+
+                    <!-- Related Projects -->
+                    <div class="project-section reveal-right">
+                        <h2 class="project-section-title">Related Projects</h2>
+                        <div class="related-projects">
+                            <a href="post-i-tivity.html" class="related-project">
+                                <h3>Post-i-tivity</h3>
+                                <p>A progressive web app for creating and collecting virtual postcards</p>
+                                <div class="project-tags">
+                                    <span class="tag">React</span>
+                                    <span class="tag">Django</span>
+                                    <span class="tag">Python</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3 class="footer-title">Eugene Au</h3>
+                    <p class="footer-description">Computer Science student and Front-end Developer based in Exeter, Devon.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-nav">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../projects.html">Projects</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3 class="footer-title">Connect</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:eugeneau499@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; <span id="current-year"></span> Eugene Au. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="../../portfolio-html/js/main.js"></script>
+    <script src="../../portfolio-html/js/animations.js"></script>
+</body>
+</html> 

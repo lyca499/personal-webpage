@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Platform | Project Details</title>
+    <meta name="description" content="Detailed case study of the E-Commerce Platform project">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <style>
+        /* Project Detail Page Specific Styles */
+        .project-header {
+            padding: 8rem 0 4rem;
+            background-color: var(--bg-color-alt);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--text-color);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color var(--transition-fast);
+        }
+        
+        .back-link i {
+            margin-right: 0.5rem;
+        }
+        
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .project-category {
+            display: inline-block;
+            background-color: rgba(139, 92, 246, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--border-radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .project-hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .project-image-large {
+            height: 400px;
+            background-color: #f3f4f6;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .project-image-large .image-placeholder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            color: var(--text-color-light);
+            font-size: 1.2rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .meta-item {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .meta-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .meta-value {
+            color: var(--text-color-light);
+        }
+        
+        .project-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .project-section {
+            margin-bottom: 4rem;
+        }
+        
+        .project-section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-color-alt);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            font-size: 0.875rem;
+        }
+        
+        .tech-item i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            height: 200px;
+            background-color: #f3f4f6;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .related-projects {
+            background-color: var(--bg-color-alt);
+            padding: 4rem 0;
+        }
+        
+        .related-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .project-hero {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+            
+            .project-image-large {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html" class="logo-text">Portfolio</a>
+                </div>
+                <nav class="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="../projects.html" class="nav-link active">Projects</a></li>
+                        <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item"><a href="../index.html" class="mobile-nav-link">Home</a></li>
+            <li class="mobile-nav-item"><a href="../projects.html" class="mobile-nav-link active">Projects</a></li>
+            <li class="mobile-nav-item"><a href="../about.html" class="mobile-nav-link">About</a></li>
+            <li class="mobile-nav-item"><a href="../contact.html" class="mobile-nav-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <a href="../projects.html" class="back-link reveal-left">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            
+            <div class="project-hero">
+                <div class="project-info reveal-left">
+                    <div class="project-category">Web Development</div>
+                    <h1 class="page-title">E-Commerce Platform</h1>
+                    <p class="page-description">A modern e-commerce solution with integrated payment gateways and inventory management.</p>
+                    
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <div class="meta-label">Client</div>
+                            <div class="meta-value">RetailTech Inc.</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Timeline</div>
+                            <div class="meta-value">3 months</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Role</div>
+                            <div class="meta-value">Full Stack Developer</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-buttons">
+                        <a href="https://example.com/demo" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        <a href="https://github.com/" target="_blank" class="btn btn-secondary">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="project-image-large reveal-right">
+                    <div class="image-placeholder">Project Image</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="project-details">
+        <div class="container">
+            <!-- Overview Section -->
+            <div class="project-section reveal-bottom">
+                <h2 class="project-section-title">Project Overview</h2>
+                <div class="project-content">
+                    <p>This comprehensive e-commerce platform provides businesses with everything they need to sell products online. From inventory management to secure checkout processes, the platform streamlines the online shopping experience for both merchants and customers.</p>
+                    <p>The client, RetailTech Inc., needed a scalable solution that could handle their growing product catalog while providing a seamless shopping experience for their customers. The platform was built with a focus on performance, security, and user experience.</p>
+                </div>
+            </div>
+            
+            <!-- Challenges Section -->
+            <div class="project-section reveal-bottom">
+                <h2 class="project-section-title">Challenges</h2>
+                <div class="project-content">
+                    <p>Implementing a secure payment processing system while ensuring a smooth user experience was a significant challenge. Additionally, creating a scalable database structure to handle varying product categories and attributes required careful planning.</p>
+                    <p>Other challenges included:</p>
+                    <ul>
+                        <li>Integrating multiple payment gateways with consistent user experience</li>
+                        <li>Building a responsive design that works across all devices</li>
+                        <li>Implementing real-time inventory tracking</li>
+                        <li>Ensuring fast page load times despite complex product filtering</li>
+                        <li>Creating a secure authentication system with role-based permissions</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Solutions Section -->
+            <div class="project-section reveal-bottom">
+                <h2 class="project-section-title">Solutions</h2>
+                <div class="project-content">
+                    <p>I used Stripe's API for secure payment processing and implemented a MongoDB schema that allows for flexible product attributes. The React frontend provides a responsive interface that works well across all devices.</p>
+                    <p>Key solutions included:</p>
+                    <ul>
+                        <li>Implementing a microservices architecture for better scalability</li>
+                        <li>Using Redis for caching to improve performance</li>
+                        <li>Creating a custom admin dashboard for inventory management</li>
+                        <li>Implementing JWT authentication with role-based access control</li>
+                        <li>Using lazy loading and code splitting to improve page load times</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Technologies Section -->
+            <div class="project-section reveal-bottom">
+                <h2 class="project-section-title">Technologies Used</h2>
+                <div class="tech-list">
+                    <div class="tech-item"><i class="fab fa-react"></i> React</div>
+                    <div class="tech-item"><i class="fab fa-node-js"></i> Node.js</div>
+                    <div class="tech-item"><i class="fab fa-js"></i> Express</div>
+                    <div class="tech-item"><i class="fas fa-database"></i> MongoDB</div>
+                    <div class="tech-item"><i class="fab fa-stripe"></i> Stripe API</div>
+                    <div class="tech-item"><i class="fab fa-aws"></i> AWS S3</div>
+                    <div class="tech-item"><i class="fab fa-docker"></i> Docker</div>
+                    <div class="tech-item"><i class="fas fa-server"></i> Nginx</div>
+                    <div class="tech-item"><i class="fab fa-sass"></i> SCSS</div>
+                    <div class="tech-item"><i class="fab fa-git-alt"></i> Git</div>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="project-section reveal-bottom">
+                <h2 class="project-section-title">Results</h2>
+                <div class="project-content">
+                    <p>The e-commerce platform has been a significant success for RetailTech Inc., resulting in:</p>
+                    <ul>
+                        <li>35% increase in online sales within the first three months</li>
+                        <li>50% reduction in cart abandonment rate</li>
+                        <li>Improved inventory accuracy and reduced stockouts</li>
+                        <li>Streamlined order fulfillment process</li>
+                        <li>Positive customer feedback on the shopping experience</li>
+                    </ul>
+                    <p>The platform continues to evolve with new features and optimizations based on user feedback and business requirements.</p>
+                </div>
+            </div>
+            
+            <!-- Gallery Section -->
+            <div class="project-section reveal-bottom">
+                <h2 class="project-section-title">Project Gallery</h2>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <div class="image-placeholder">Screenshot 1</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="image-placeholder">Screenshot 2</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="image-placeholder">Screenshot 3</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="image-placeholder">Screenshot 4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Projects -->
+    <section class="related-projects">
+        <div class="container">
+            <h2 class="related-title section-title reveal-bottom">Related Projects</h2>
+            
+            <div class="related-grid">
+                <!-- Related Project 1 -->
+                <div class="project-card reveal-item" data-category="web">
+                    <div class="project-image">
+                        <div class="image-placeholder">Project Image</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Portfolio Website</h3>
+                        <p class="project-description">A responsive portfolio website with modern design and smooth animations.</p>
+                        <a href="portfolio-website.html" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Related Project 2 -->
+                <div class="project-card reveal-item" data-category="web">
+                    <div class="project-image">
+                        <div class="image-placeholder">Project Image</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Social Media Dashboard</h3>
+                        <p class="project-description">Unified dashboard for tracking and analyzing social media campaigns.</p>
+                        <a href="social-dashboard.html" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content reveal-bottom">
+                <h2 class="cta-title">Let's Work Together</h2>
+                <p class="cta-description">Have a project in mind or need a dedicated developer for your team? I'm currently available for freelance work and opportunities.</p>
+                <a href="../contact.html" class="btn btn-light">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3 class="footer-title">Portfolio</h3>
+                    <p class="footer-description">A showcase of my skills, projects, and professional journey.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-nav">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../projects.html">Projects</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3 class="footer-title">Connect</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com/" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://dribbble.com/" target="_blank" class="social-icon"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; <span id="current-year"></span> Portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html> 

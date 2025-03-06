@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eugene Au | Portfolio</title>
+    <meta name="description" content="Eugene Au's portfolio - Computer Science student and Front-end Developer">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* Add these styles to the existing style section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card {
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            background-color: var(--card-bg);
+            transition: transform var(--transition-fast);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            position: relative;
+            width: 100%;
+            padding-bottom: 66.67%; /* 3:2 aspect ratio */
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-medium);
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-info {
+            color: white;
+        }
+        
+        .project-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-info p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tag {
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.8rem;
+            backdrop-filter: blur(4px);
+        }
+        
+        .btn-light {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 500;
+            transition: all var(--transition-fast);
+            display: inline-block;
+        }
+        
+        .btn-light:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .section-footer {
+            text-align: center;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" class="logo-text">Eugene Au</a>
+                </div>
+                <nav class="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+                        <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item"><a href="index.html" class="mobile-nav-link active">Home</a></li>
+            <li class="mobile-nav-item"><a href="projects.html" class="mobile-nav-link">Projects</a></li>
+            <li class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About</a></li>
+            <li class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text reveal-left">
+                    <h1 class="hero-title">Computer Science Student & Front-end Developer</h1>
+                    <p class="hero-description">First-class Computer Science student at University of Exeter with expertise in front-end development, machine learning, and software engineering.</p>
+                    <div class="hero-buttons">
+                        <a href="projects.html" class="btn btn-primary">View Projects</a>
+                        <a href="contact.html" class="btn btn-secondary">Contact Me</a>
+                    </div>
+                </div>
+                <div class="hero-image reveal-right">
+                    <div class="image-container">
+                        <img src="sexy-man.jpg" alt="Eugene Au" class="hero-image-main">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg"></div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects-section">
+        <div class="section-header reveal-bottom">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-description">Here are some of my recent projects that showcase my skills and experience.</p>
+        </div>
+        <div class="projects-grid">
+            <!-- Post-i-tivity Project -->
+            <div class="project-card reveal-item" data-category="web">
+                <div class="project-image">
+                    <img src="website_screenshot.png" alt="Post-i-tivity Project">
+                    <div class="project-overlay">
+                        <div class="project-info">
+                            <h3 class="project-title">Post-i-tivity</h3>
+                            <p class="project-description">A progressive web app for creating and collecting virtual postcards at Exeter University.</p>
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Django</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">PostgreSQL</span>
+                            </div>
+                            <a href="projects/post-i-tivity.html" class="btn btn-light">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pairs Game Project -->
+            <div class="project-card reveal-item" data-category="web">
+                <div class="project-image">
+                    <img src="images/pairs-game-screenshot.png" alt="Pairs Game Project">
+                    <div class="project-overlay">
+                        <div class="project-info">
+                            <h3 class="project-title">Pairs Game</h3>
+                            <p class="project-description">An interactive memory card game with multiple difficulty levels and customizable avatars.</p>
+                            <div class="project-tags">
+                                <span class="tag">PHP</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">MySQL</span>
+                                <span class="tag">CSS</span>
+                            </div>
+                            <a href="projects/pairs-game.html" class="btn btn-light">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-footer reveal-bottom">
+            <a href="projects.html" class="btn btn-primary">View All Projects</a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <div class="section-header reveal-bottom">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <p class="section-description">A collection of technologies and skills I've developed throughout my education and projects.</p>
+            </div>
+            <div class="skills-grid">
+                <!-- Skill Category 1 -->
+                <div class="skill-category reveal-item">
+                    <h3 class="category-title">Programming Languages</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Python</span>
+                                <span class="skill-percentage">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript/TypeScript</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Java</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">C/C++</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Haskell</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skill Category 2 -->
+                <div class="skill-category reveal-item">
+                    <h3 class="category-title">Frameworks & Libraries</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">React</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Django</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">TensorFlow/Keras</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">NumPy/Pandas</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Bootstrap</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Skill Category 3 -->
+                <div class="skill-category reveal-item">
+                    <h3 class="category-title">Other Skills</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">UI/UX Design (Figma)</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Agile/Scrum</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Database Management</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Software Engineering</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">MATLAB</span>
+                                <span class="skill-percentage">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section">
+        <div class="container">
+            <div class="section-header reveal-bottom">
+                <h2 class="section-title">Education</h2>
+                <p class="section-description">My academic background and achievements.</p>
+            </div>
+            <div class="education-content reveal-bottom">
+                <div class="education-item">
+                    <div class="education-timeline">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="education-details">
+                        <div class="education-period">September 2020 - Present</div>
+                        <h3 class="education-degree">Bachelor of Science, Computer Science</h3>
+                        <div class="education-institution">University of Exeter, Devon</div>
+                        <ul class="education-achievements">
+                            <li>First-Class honors (predicted)</li>
+                            <li><strong>Machine Learning Module (Spring 2024):</strong> Scored 68% on coursework centered on deep learning techniques, data preprocessing, and neural network architectures.</li>
+                            <li><strong>Java Programming Module (Autumn 2023):</strong> Achieved a top mark (98%) on a multithreaded card game application, applying object-oriented principles.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+        <div class="container">
+            <div class="section-header reveal-bottom">
+                <h2 class="section-title">Leadership & Experience</h2>
+                <p class="section-description">My professional journey and leadership roles.</p>
+            </div>
+            <div class="experience-content">
+                <div class="experience-item reveal-left">
+                    <div class="experience-timeline">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="experience-details">
+                        <div class="experience-period">September 2023 - July 2024</div>
+                        <h3 class="experience-role">Core Team Member</h3>
+                        <div class="experience-company">Google Student Developer Club, University of Exeter</div>
+                        <p class="experience-description">Worked with a team of 4 in organizing hackathons, social events, social media poster making and other committee tasks.</p>
+                    </div>
+                </div>
+                
+                <div class="experience-item reveal-right">
+                    <div class="experience-timeline">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="experience-details">
+                        <div class="experience-period">October 2023 - November 2023</div>
+                        <h3 class="experience-role">Workshop Leader</h3>
+                        <div class="experience-company">ExCode Leader, University of Exeter</div>
+                        <p class="experience-description">Guided ~12 beginners through Python fundamentals, resulting in improved overall understanding in programming skills.</p>
+                    </div>
+                </div>
+                
+                <div class="experience-item reveal-left">
+                    <div class="experience-timeline">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="experience-details">
+                        <div class="experience-period">June 2023</div>
+                        <h3 class="experience-role">Web Developer</h3>
+                        <div class="experience-company">Grand Challenges, University of Exeter</div>
+                        <p class="experience-description">Worked with students from different majors in creating and designing a website that informs students of the importance of ESG investing.</p>
+                    </div>
+                </div>
+                
+                <div class="experience-item reveal-right">
+                    <div class="experience-timeline">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="experience-details">
+                        <div class="experience-period">June 2024 - July 2024</div>
+                        <h3 class="experience-role">Warehouse</h3>
+                        <div class="experience-company">Amazon, Exeter, Devon</div>
+                        <p class="experience-description">Sorted packages into bags from shelves and delivered them to drivers. Demonstrated teamwork, time management, and attention to detail in a fast-paced environment.</p>
+                    </div>
+                </div>
+                
+                <div class="experience-item reveal-left">
+                    <div class="experience-timeline">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="experience-details">
+                        <div class="experience-period">June 2022 - August 2022</div>
+                        <h3 class="experience-role">Apprentice Baker</h3>
+                        <div class="experience-company">A1 Bakery, New Territories, Hong Kong</div>
+                        <p class="experience-description">Assisted with dough preparation and followed specific instructions. Maintained cleanliness of the workspace.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content reveal-bottom">
+                <h2 class="cta-title">Let's Work Together</h2>
+                <p class="cta-description">Have a project in mind or interested in my skills? I'm currently available for freelance work and opportunities.</p>
+                <a href="contact.html" class="btn btn-light">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3 class="footer-title">Eugene Au</h3>
+                    <p class="footer-description">Computer Science student and Full-Stack Developer based in Exeter, Devon.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3 class="footer-title">Connect</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:eugeneau499@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; <span id="current-year"></span> Eugene Au. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html> 
