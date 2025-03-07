@@ -16,65 +16,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
-    <style>
-        /* Projects Page Specific Styles */
-        .filter-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .filter-btn {
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            background-color: transparent;
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            font-family: var(--font-primary);
-            font-weight: 500;
-        }
-        
-        .filter-btn:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-        
-        .filter-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-        
-        .dark-mode .filter-btn:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-        
-        .projects-grid {
-            min-height: 400px;
-        }
-        
-        .project-card {
-            transition: all var(--transition-medium);
-        }
-        
-        .project-card.hide {
-            display: none;
-        }
-        
-        .no-results {
-            text-align: center;
-            padding: 3rem 0;
-            color: var(--text-color-light);
-            display: none;
-        }
-        
-        .no-results.show {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="css/projects.css">
 </head>
 <body>
     <!-- Preloader -->
@@ -131,7 +73,7 @@
 
     <!-- Projects Section -->
     <section class="projects-section">
-        <div class="container">
+        <div class="projects-container">
             <!-- Filter Buttons -->
             <div class="filter-container reveal-bottom">
                 <button class="filter-btn active" data-filter="all">All</button>
@@ -146,39 +88,49 @@
                 <!-- Post-i-tivity Project -->
                 <div class="project-card reveal-item" data-category="web">
                     <div class="project-image">
-                        <img src="../portfolio-html/website_screenshot.png" alt="Post-i-tivity Project">
-                        <div class="project-overlay">
-                            <div class="project-info">
-                                <h3 class="project-title">Post-i-tivity</h3>
-                                <p class="project-description">A progressive web app for creating and collecting virtual postcards at Exeter University.</p>
-                                <div class="project-tags">
-                                    <span class="tag">React</span>
-                                    <span class="tag">Django</span>
-                                    <span class="tag">Python</span>
-                                    <span class="tag">PostgreSQL</span>
-                                </div>
-                                <a href="projects/post-i-tivity.html" class="btn btn-light">View Project</a>
-                            </div>
+                        <img src="images/post-i-tivity.png" alt="Post-i-tivity Project">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Post-i-tivity</h3>
+                        <p class="project-description">A progressive web app for creating and collecting virtual postcards at Exeter University. Features geolocation, custom postcard creation, and social sharing.</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Django</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">PostgreSQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="projects/post-i-tivity.html" class="project-link primary">
+                                View Project <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://github.com/yourusername/post-i-tivity" target="_blank" class="project-link secondary">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Pairs Game Project -->
-                <div class="project-card reveal-item" data-category="web">
+                <div class="project-card reveal-item" data-category="game">
                     <div class="project-image">
-                        <img src="../portfolio-html/images/pairs-game-screenshot.png" alt="Pairs Game Project">
-                        <div class="project-overlay">
-                            <div class="project-info">
-                                <h3 class="project-title">Pairs Game</h3>
-                                <p class="project-description">An interactive memory card game with multiple difficulty levels and customizable avatars.</p>
-                                <div class="project-tags">
-                                    <span class="tag">PHP</span>
-                                    <span class="tag">JavaScript</span>
-                                    <span class="tag">MySQL</span>
-                                    <span class="tag">CSS</span>
-                                </div>
-                                <a href="projects/pairs-game.html" class="btn btn-light">View Project</a>
-                            </div>
+                        <img src="images/minigame.png" alt="Pairs Game Project">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Pairs Game</h3>
+                        <p class="project-description">An interactive memory card game with multiple difficulty levels, customizable avatars, and a global leaderboard system.</p>
+                        <div class="project-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="projects/pairs-game.html" class="project-link primary">
+                                View Project <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="https://github.com/yourusername/pairs-game" target="_blank" class="project-link secondary">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -248,39 +200,37 @@
             const filterButtons = document.querySelectorAll('.filter-btn');
             const projectCards = document.querySelectorAll('.project-card');
             const noResults = document.querySelector('.no-results');
-            
-            // Filter projects when a filter button is clicked
+
+            function filterProjects(category) {
+                let hasVisibleProjects = false;
+                
+                projectCards.forEach(card => {
+                    const cardCategory = card.dataset.category;
+                    if (category === 'all' || cardCategory === category) {
+                        card.classList.remove('hide');
+                        hasVisibleProjects = true;
+                    } else {
+                        card.classList.add('hide');
+                    }
+                });
+
+                // Show/hide no results message
+                if (hasVisibleProjects) {
+                    noResults.classList.remove('show');
+                } else {
+                    noResults.classList.add('show');
+                }
+            }
+
+            // Add click event listeners to filter buttons
             filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', () => {
                     // Remove active class from all buttons
                     filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
                     // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    // Get filter value
-                    const filterValue = this.getAttribute('data-filter');
-                    
+                    button.classList.add('active');
                     // Filter projects
-                    let visibleCount = 0;
-                    
-                    projectCards.forEach(card => {
-                        const category = card.getAttribute('data-category');
-                        
-                        if (filterValue === 'all' || filterValue === category) {
-                            card.classList.remove('hide');
-                            visibleCount++;
-                        } else {
-                            card.classList.add('hide');
-                        }
-                    });
-                    
-                    // Show/hide no results message
-                    if (visibleCount === 0) {
-                        noResults.classList.add('show');
-                    } else {
-                        noResults.classList.remove('show');
-                    }
+                    filterProjects(button.dataset.filter);
                 });
             });
         });
