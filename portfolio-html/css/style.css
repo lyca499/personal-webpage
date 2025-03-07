@@ -346,14 +346,38 @@ img {
     width: 100%;
     height: 100%;
     background: 
-        linear-gradient(135deg, 
-            rgba(139, 92, 246, 0.1), 
-            rgba(96, 165, 250, 0.1)
-        ),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(96, 165, 250, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 60% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 30%);
     z-index: -1;
-    opacity: 0.8;
-    animation: grainAnimation 8s steps(10) infinite;
+    overflow: hidden;
+}
+
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+}
+
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+    animation: morphBackground 20s ease-in-out infinite alternate;
+    z-index: -1;
 }
 
 .hero-content {
@@ -695,6 +719,11 @@ section {
 }
 
 .skill-progress {
+    height: 100%;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    border-radius: var(--border-radius-full);
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 }
@@ -706,7 +735,7 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     opacity: 0.1;
     mix-blend-mode: overlay;
 }
@@ -1322,22 +1351,31 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
-/* Grainy Texture Animation */
-@keyframes grainAnimation {
-    0% { transform: translate(0, 0); }
-    10% { transform: translate(-5%, -5%); }
-    20% { transform: translate(-10%, 5%); }
-    30% { transform: translate(5%, -10%); }
-    40% { transform: translate(-5%, 15%); }
-    50% { transform: translate(-10%, 5%); }
-    60% { transform: translate(15%, 0); }
-    70% { transform: translate(0, 10%); }
-    80% { transform: translate(3%, 35%); }
-    90% { transform: translate(-10%, 10%); }
-    100% { transform: translate(0, 0); }
+/* Abstract shape animation */
+@keyframes morphBackground {
+    0% {
+        transform: rotate(0deg) scale(1) translateX(0) translateY(0);
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+    25% {
+        transform: rotate(90deg) scale(1.1) translateX(5%) translateY(-5%);
+        border-radius: 70% 30% 50% 50% / 50% 50% 50% 50%;
+    }
+    50% {
+        transform: rotate(180deg) scale(0.9) translateX(-5%) translateY(5%);
+        border-radius: 50% 50% 30% 70% / 70% 30% 70% 30%;
+    }
+    75% {
+        transform: rotate(270deg) scale(1.1) translateX(5%) translateY(5%);
+        border-radius: 30% 70% 70% 30% / 70% 30% 30% 70%;
+    }
+    100% {
+        transform: rotate(360deg) scale(1) translateX(0) translateY(0);
+        border-radius: 70% 30% 30% 70% / 30% 70% 70% 30%;
+    }
 }
 
-/* Grainy Overlay */
+/* Enhanced grain overlay */
 .grain-overlay {
     position: fixed;
     width: 100%;
@@ -1345,22 +1383,101 @@ html {
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 1000;
-    opacity: 0.05;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    animation: grainAnimation 8s steps(10) infinite;
+    z-index: 1;
+    opacity: 0.07;
+    background: 
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+        linear-gradient(to right, rgba(139, 92, 246, 0.03), rgba(96, 165, 250, 0.03));
+    mix-blend-mode: multiply;
+    animation: grainShift 8s steps(8) infinite;
 }
 
-/* Add to existing hover effects */
-.project-card:hover .project-image img {
-    transform: scale(1.05) rotate(1deg);
+@keyframes grainShift {
+    0% { transform: translate(0, 0) scale(1); }
+    10% { transform: translate(-2%, -2%) scale(1.02); }
+    20% { transform: translate(-3%, 1%) scale(1); }
+    30% { transform: translate(1%, -3%) scale(1.02); }
+    40% { transform: translate(-1%, 3%) scale(1); }
+    50% { transform: translate(-3%, 1%) scale(1.02); }
+    60% { transform: translate(3%, 0) scale(1); }
+    70% { transform: translate(0, 2%) scale(1.02); }
+    80% { transform: translate(1%, 5%) scale(1); }
+    90% { transform: translate(-3%, 2%) scale(1.02); }
+    100% { transform: translate(0, 0) scale(1); }
 }
 
-.btn:hover {
-    transform: translateY(-2px) scale(1.02);
+/* Add these new abstract shape classes */
+.shape-1, .shape-2, .shape-3 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.3;
+    z-index: -1;
 }
 
-/* Smooth animation for skill bars */
-.skill-progress {
-    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-} 
+.shape-1 {
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(139, 92, 246, 0) 70%);
+    width: 500px;
+    height: 500px;
+    top: -100px;
+    left: -100px;
+    animation: floatShape1 20s ease-in-out infinite;
+}
+
+.shape-2 {
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.4) 0%, rgba(96, 165, 250, 0) 70%);
+    width: 600px;
+    height: 600px;
+    bottom: -200px;
+    right: -100px;
+    animation: floatShape2 25s ease-in-out infinite;
+}
+
+.shape-3 {
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, rgba(236, 72, 153, 0) 70%);
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: floatShape3 30s ease-in-out infinite;
+}
+
+@keyframes floatShape1 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(50px, 30px) rotate(90deg); }
+    50% { transform: translate(20px, 60px) rotate(180deg); }
+    75% { transform: translate(-30px, 40px) rotate(270deg); }
+}
+
+@keyframes floatShape2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-40px, -50px) rotate(-90deg); }
+    50% { transform: translate(-20px, -20px) rotate(-180deg); }
+    75% { transform: translate(30px, -40px) rotate(-270deg); }
+}
+
+@keyframes floatShape3 {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    25% { transform: translate(-45%, -55%) scale(1.1); }
+    50% { transform: translate(-55%, -45%) scale(0.9); }
+    75% { transform: translate(-45%, -45%) scale(1.2); }
+}
+
+/* Add this to your existing JavaScript or create a new script */
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const width = entry.target.getAttribute('data-width') + '%';
+                entry.target.style.width = width;
+            }
+        });
+    }, { threshold: 0.1 });
+
+    skillBars.forEach(bar => observer.observe(bar));
+});
+</script> 
